@@ -95,19 +95,3 @@ class LanguageManager:
             language_names.append(language_name)
         return language_names
 
-# Example usage
-language_manager = LanguageManager(default_language='de_DE')
-
-name = "Philipp"
-print(language_manager.get_message('welcome.message', 'Hallo {name}, willkommen in diesem Programm!'))
-
-language_manager.set_language('en_US')
-print(language_manager.get_message('welcome.message', 'Welcome {name} to this program!'))
-
-# List of available languages
-available_languages = language_manager.get_available_languages()
-print("Available languages:", available_languages)
-
-# List of full language names
-language_names = language_manager.get_language_names()
-print("Language names:", language_names)
