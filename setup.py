@@ -1,9 +1,9 @@
-from setuptools import setup, find_packages
+from setuptools import setup
 
 setup(
     name='multi_language_framework',
     version='1.0',
-    packages=find_packages(),
+    py_modules=['language_manager'],
     install_requires=['pyyaml'],
     include_package_data=True,
     description='A Python framework for multi-language message support',
