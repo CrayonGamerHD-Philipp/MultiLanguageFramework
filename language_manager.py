@@ -36,26 +36,32 @@ class LanguageManager:
         else:
             self.load_languages()
 
-    def get_message(self, key, fallback_message, language=None):
-        """Retrieve message in the desired language or use fallback and replace placeholders."""
+    def get_message(self, key, fallback_message=None, language=None):
+        """Retrieve message in the desired language or use fallback. Throws error if not found."""
         language = language or self.current_language
 
         if self.default_language not in self.languages:
+            if fallback_message is None:
+                raise ValueError(f"Message key '{key}' not found and no fallback message provided.")
             self.create_language_file(key, fallback_message)
 
         # Check if the message exists in the requested language
         if language in self.languages:
             if key not in self.languages[language]:
+                if fallback_message is None:
+                    raise ValueError(f"Message key '{key}' not found and no fallback message provided.")
                 # Add missing keys to the default language file at the end
                 self.languages[self.default_language][key] = fallback_message
                 self.append_to_language_file(self.default_language, key, fallback_message)
             message = self.languages[language].get(key, fallback_message)
         else:
+            if fallback_message is None:
+                raise ValueError(f"Message key '{key}' not found and no fallback message provided.")
             message = self.languages[self.default_language].get(key, fallback_message)
 
-        # Replace placeholders using local and global variables (i.e., variables in the current context)
+        # Replace placeholders using local and global variables
         try:
-            message = message.format(**{**globals(), **locals()})
+            message = message.format(**{k: v for k, v in {**globals(), **locals()}.items() if k != 'self'})
         except KeyError as e:
             raise ValueError(f"Missing key for message formatting: {e}")
 
