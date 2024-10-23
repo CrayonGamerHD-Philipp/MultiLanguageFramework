@@ -27,6 +27,7 @@ class LanguageManager:
         if not os.path.exists(file_path):
             lang_info = {
                 'language': self.default_language,
+                'language_name': 'LANGUAGE_NAME',  # Placeholder for language name
                 'version': '1.0',
                 key: fallback_message
             }
@@ -78,3 +79,35 @@ class LanguageManager:
         """Change the current language."""
         self.current_language = language_code
 
+    def get_available_languages(self):
+        """Return a list of available languages and their full names."""
+        available_languages = []
+        for lang_code, lang_data in self.languages.items():
+            language_name = lang_data.get('language_name', 'UNKNOWN')
+            available_languages.append((lang_code, language_name))
+        return available_languages
+
+    def get_language_names(self):
+        """Return a list of the full names of the available languages."""
+        language_names = []
+        for lang_data in self.languages.values():
+            language_name = lang_data.get('language_name', 'UNKNOWN')
+            language_names.append(language_name)
+        return language_names
+
+# Example usage
+language_manager = LanguageManager(default_language='de_DE')
+
+name = "Philipp"
+print(language_manager.get_message('welcome.message', 'Hallo {name}, willkommen in diesem Programm!'))
+
+language_manager.set_language('en_US')
+print(language_manager.get_message('welcome.message', 'Welcome {name} to this program!'))
+
+# List of available languages
+available_languages = language_manager.get_available_languages()
+print("Available languages:", available_languages)
+
+# List of full language names
+language_names = language_manager.get_language_names()
+print("Language names:", language_names)
