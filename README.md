@@ -57,6 +57,15 @@ Retrieve a message in a specific language without changing the global language s
 print(language_manager.get_message('welcome.message', 'Hallo, willkommen in diesem Programm!', 'de_DE'))
 ```
 
+### Retrieving Messages with Placeholders
+
+You can use placeholders like {name} in your messages, and the placeholders will be replaced by variables from the current scope. For example:
+
+```python
+name = "Philipp"
+print(language_manager.get_message('welcome.message', 'Hallo {name}, willkommen in diesem Programm!'))
+```
+
 ### File Structure
 
 Language files are stored in the `language` directory. These are created automatically the first time a message key is accessed, and they are named using the language code (e.g. `de_DE.yml`, `en_US.yml`).

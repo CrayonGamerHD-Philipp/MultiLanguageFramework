@@ -4,8 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a3f2057d-d9ce-45b3-8f18-0636e7a3ae87" name="Changes" comment="Another little Updates">
+    <list default="true" id="a3f2057d-d9ce-45b3-8f18-0636e7a3ae87" name="Changes" comment="Version Update">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/language_manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/language_manager.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,9 +47,11 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Python.TEST.executor": "Run",
+    "Python.language_manager.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "master",
+    "last_opened_file_path": "/home/philipp-hethey/PycharmProjects/LanguageManager/language",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -58,6 +61,9 @@
   }
 }]]></component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/language" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/language" />
       <recent name="$PROJECT_DIR$" />
@@ -80,7 +86,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1729678256965</updated>
-      <workItem from="1729678259502" duration="2325000" />
+      <workItem from="1729678259502" duration="3488000" />
     </task>
     <task id="LOCAL-00001" summary="Init">
       <option name="closed" value="true" />
@@ -106,7 +112,23 @@
       <option name="project" value="LOCAL" />
       <updated>1729680072868</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Another little Updates (-;">
+      <option name="closed" value="true" />
+      <created>1729680835343</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1729680835343</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Version Update">
+      <option name="closed" value="true" />
+      <created>1729680860904</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1729680860904</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -116,9 +138,12 @@
     <MESSAGE value="Init" />
     <MESSAGE value="Little Updates" />
     <MESSAGE value="Another little Updates" />
-    <option name="LAST_COMMIT_MESSAGE" value="Another little Updates" />
+    <MESSAGE value="Another little Updates (-;" />
+    <MESSAGE value="Version Update" />
+    <option name="LAST_COMMIT_MESSAGE" value="Version Update" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/LanguageManager$language_manager.coverage" NAME="language_manager Coverage Results" MODIFIED="1729681694360" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/LanguageManager$TEST.coverage" NAME="TEST Coverage Results" MODIFIED="1729679792969" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/language" />
   </component>
 </project>

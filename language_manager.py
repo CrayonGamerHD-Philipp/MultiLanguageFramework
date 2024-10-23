@@ -37,20 +37,29 @@ class LanguageManager:
             self.load_languages()
 
     def get_message(self, key, fallback_message, language=None):
-        """Retrieve message in the desired language or use fallback."""
+        """Retrieve message in the desired language or use fallback and replace placeholders."""
         language = language or self.current_language
 
         if self.default_language not in self.languages:
             self.create_language_file(key, fallback_message)
 
+        # Check if the message exists in the requested language
         if language in self.languages:
             if key not in self.languages[language]:
-                # Always add missing keys to the default language file at the end
+                # Add missing keys to the default language file at the end
                 self.languages[self.default_language][key] = fallback_message
                 self.append_to_language_file(self.default_language, key, fallback_message)
-            return self.languages[language].get(key, fallback_message)
+            message = self.languages[language].get(key, fallback_message)
         else:
-            return self.languages[self.default_language].get(key, fallback_message)
+            message = self.languages[self.default_language].get(key, fallback_message)
+
+        # Replace placeholders using local and global variables (i.e., variables in the current context)
+        try:
+            message = message.format(**{**globals(), **locals()})
+        except KeyError as e:
+            raise ValueError(f"Missing key for message formatting: {e}")
+
+        return message
 
     def append_to_language_file(self, language_code, key, message):
         """Append a new key to the existing language file."""
@@ -62,3 +71,4 @@ class LanguageManager:
     def set_language(self, language_code):
         """Change the current language."""
         self.current_language = language_code
+
