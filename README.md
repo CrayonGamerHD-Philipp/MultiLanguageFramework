@@ -67,6 +67,42 @@ name = "Philipp"
 print(language_manager.get_message('welcome.message', 'Hallo {name}, willkommen in diesem Programm!'))
 ```
 
+### Using Dynamic Variables in Messages
+
+When retrieving messages using `get_message`, you can pass dynamic variables that will be used to format placeholders in the message. Instead of automatically including all class attributes or global variables, you must explicitly pass the variables you want to use in the message.
+
+#### Example
+
+Let's say you want to include the player's number dynamically in a message. First, you define the message with a placeholder `{player_str}`. Then, you pass the variable `player_str` explicitly when calling `get_message`.
+
+```python
+def next_step(self, player_int):
+    player_str = str(player_int)  # Define the dynamic variable
+    question = self.language_manager.get_message(
+        "next_step_message", 
+        "Spieler {player_str}: Wie willst du fortfahren? Bitte Feldziffer eingeben!: ",
+        player_str=player_str  # Explicitly pass the variable
+    )
+    print(question)
+
+# Initialize the LanguageManager
+language_manager = LanguageManager(default_language='de_DE')
+
+# Create a Game instance and call next_step
+game = Game(language_manager)
+game.next_step(1)
+```
+
+#### Output
+
+```
+Spieler 1: Wie willst du fortfahren? Bitte Feldziffer eingeben!: 
+```
+
+### Why Explicit Variable Passing?
+
+Explicitly passing variables ensures that only the required values are used to format the message. This approach avoids confusion and keeps the scope of the variables clear. You don't need to worry about accidentally overwriting variables or dealing with unexpected behavior from automatically included variables. Every variable you want to use in the message must be clearly defined and passed.
+
 ### Retrieving Messages Without Fallback
 
 You can now retrieve a message without specifying a fallback message. If the key does not exist in the language file and no fallback is provided, the system will raise an error. This is useful when you want to enforce that all messages must exist in the language files.
