@@ -60,12 +60,48 @@ print(language_manager.get_message('welcome.message', 'Hallo, willkommen in dies
 
 ### Retrieving Messages with Placeholders
 
-You can use placeholders like {name} in your messages, and the placeholders will be replaced by variables from the current scope. For example:
+You can use placeholders like `{name}` in your messages, and the placeholders will be replaced by variables from the current scope. For example:
 
 ```python
 name = "Philipp"
 print(language_manager.get_message('welcome.message', 'Hallo {name}, willkommen in diesem Programm!'))
 ```
+
+### Using Dynamic Variables in Messages
+
+When retrieving messages using `get_message`, you can pass dynamic variables that will be used to format placeholders in the message. Instead of automatically including all class attributes or global variables, you must explicitly pass the variables you want to use in the message.
+
+#### Example
+
+Let's say you want to include the player's number dynamically in a message. First, you define the message with a placeholder `{player_str}`. Then, you pass the variable `player_str` explicitly when calling `get_message`.
+
+```python
+def next_step(self, player_int):
+    player_str = str(player_int)  # Define the dynamic variable
+    question = self.language_manager.get_message(
+        "next_step_message", 
+        "Spieler {player_str}: Wie willst du fortfahren? Bitte Feldziffer eingeben!: ",
+        player_str=player_str  # Explicitly pass the variable
+    )
+    print(question)
+
+# Initialize the LanguageManager
+language_manager = LanguageManager(default_language='de_DE')
+
+# Create a Game instance and call next_step
+game = Game(language_manager)
+game.next_step(1)
+```
+
+#### Output
+
+```
+Spieler 1: Wie willst du fortfahren? Bitte Feldziffer eingeben!: 
+```
+
+### Why Explicit Variable Passing?
+
+Explicitly passing variables ensures that only the required values are used to format the message. This approach avoids confusion and keeps the scope of the variables clear. You don't need to worry about accidentally overwriting variables or dealing with unexpected behavior from automatically included variables. Every variable you want to use in the message must be clearly defined and passed.
 
 ### Retrieving Messages Without Fallback
 
@@ -94,8 +130,35 @@ Example structure of a `de_DE.yml` file:
 ```yaml
 language: de_DE
 language_name: "GERMAN"
-version: 1.0
+version: '1.0'
 welcome.message: "Hallo, willkommen in diesem Programm!"
+```
+
+### Adding New Languages
+
+To add a new language, simply create a new `.yml` file with the appropriate language code in the `language` directory. You do not need to register the new language anywhere; just adding the file will make the language available for use.
+
+Use the same structure as the other language files. For example, if you want to add Japanese (ja_JP), create a file named `ja_JP.yml` with the following structure:
+
+```yaml
+language: ja_JP
+language_name: "JAPANESE"
+version: '1.0'
+welcome.message: "こんにちは、このプログラムへようこそ！"
+points: '{BLUE}ポイント: プレイヤー 1 - {player_points_1} | プレイヤー 2 - {player_points_2}{RESET}'
+next_game_message: 'プレイヤー {player_number}: どうしますか? フィールド番号を入力してください: '
+next_step_message: 'プレイヤー {player_str}: 次にどうしますか? フィールド番号を入力してください: '
+winner: '{GREEN}プレイヤー {player_number} が勝利しました! プレイヤー {other_player} が次のラウンドを開始します。{RESET}'
+draw: '{YELLOW}引き分けです! プレイヤー {next_player} が次のラウンドを開始します。{RESET}'
+invalid_input: '{RED}無効な入力です！ 1から9までの番号を選んでください。{RESET}'
+field_taken: '{RED}このフィールドは既に使用されています！{RESET}'
+```
+
+Once the file is added, you can switch to the new language like this:
+
+```python
+language_manager.set_language('ja_JP')
+print(language_manager.get_message('welcome.message'))
 ```
 
 ### Listing Available Languages
