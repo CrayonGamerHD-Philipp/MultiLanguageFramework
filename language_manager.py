@@ -37,8 +37,8 @@ class LanguageManager:
         else:
             self.load_languages()
 
-    def get_message(self, key, fallback_message=None, language=None):
-        """Retrieve message in the desired language or use fallback. Format variables dynamically."""
+    def get_message(self, key, fallback_message=None, language=None, **kwargs):
+        """Retrieve message in the desired language or use fallback. Support str.format()."""
         language = language or self.current_language
 
         if self.default_language not in self.languages:
@@ -60,11 +60,13 @@ class LanguageManager:
                 raise ValueError(f"Message key '{key}' not found and no fallback message provided.")
             message = self.languages[self.default_language].get(key, fallback_message)
 
-        # Replace placeholders using local and global variables (i.e., variables in the current context)
+        # Use str.format() with explicitly passed variables (kwargs)
         try:
-            message = message.format(**{k: v for k, v in {**globals(), **locals()}.items() if k != 'self'})
+            message = message.format(**kwargs)
         except KeyError as e:
             raise ValueError(f"Missing key for message formatting: {e}")
+        except Exception as e:
+            raise ValueError(f"Error formatting message: {e}")
 
         return message
 
