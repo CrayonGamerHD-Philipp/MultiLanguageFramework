@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='multi_language_framework',
-    version='1.2.6',
+    version='1.3',
     py_modules=['language_manager'],
     install_requires=['pyyaml'],
     include_package_data=True,

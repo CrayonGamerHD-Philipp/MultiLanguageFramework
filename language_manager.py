@@ -9,8 +9,8 @@ class LanguageManager:
         self.language_dir = 'language'
         self.load_languages()
 
+# Load all language files from the directory
     def load_languages(self):
-        """Load all language files from the language directory."""
         if not os.path.exists(self.language_dir):
             os.makedirs(self.language_dir)
 
@@ -21,8 +21,8 @@ class LanguageManager:
                     lang_code = file_name.split('.')[0]  # Extract language code from file name
                     self.languages[lang_code] = lang_data
 
+# Create the default language file
     def create_language_file(self, key, fallback_message):
-        """Create the default language file if it doesn't exist."""
         file_path = f'{self.language_dir}/{self.default_language}.yml'
         if not os.path.exists(file_path):
             lang_info = {
@@ -59,6 +59,9 @@ class LanguageManager:
             if fallback_message is None:
                 raise ValueError(f"Message key '{key}' not found and no fallback message provided.")
             message = self.languages[self.default_language].get(key, fallback_message)
+
+        # Replace escaped sequences like \n with actual characters
+        message = message.replace("\\n", "\n")
 
         # Use str.format() with explicitly passed variables (kwargs)
         try:
